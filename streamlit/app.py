@@ -45,10 +45,8 @@ if page == "Clustering":
     st.write("The k-means algorithm needs to know the number of clusters to find in the dataset." \
     "try and find the amount of cluster that makes the most sense!")
 
-    parent_dir = os.path.dirname(os.path.abspath(__file__))  
-
-    # Construct the correct path to 'coffee_pca.pkl'
-    df_pca = os.path.join(parent_dir, 'data', 'coffee_pca.pkl')
+    data_path = os.path.join(os.path.dirname(__file__), 'data', 'coffee_pca.pkl')
+    df_pca = pd.read_pickle(data_path)
     n_clusters = st.number_input(min_value=1, max_value=10, label="Number clusters")
 
     if (st.button("Predict k-means") and n_clusters):
@@ -64,7 +62,8 @@ if page == "Clustering":
     # Dendogram for agglomerative clustering
     st.header("Agglomerative Clustering")
     st.write("For finding out the optimal number of cluster by euclidean distance of data points. One can use a dendogram to visualize it potential cluster amount.")
-    dendo_png = os.path.join(parent_dir, 'data', 'dendogram.png')
+    data_path_dendo = os.path.join(os.path.dirname(__file__), 'data', 'dendogram.png')
+    dendo_png = mpimg.imread(data_path_dendo)
     st.image(dendo_png)
 
     n_clusters_agg = st.number_input(min_value=1, max_value=10, label="Number clusters", key="2")
